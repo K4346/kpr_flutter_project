@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kpr_flutter_project">
    <application
-        android:label="kpr_flutter_project"
+        android:label="CurrencyRates"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

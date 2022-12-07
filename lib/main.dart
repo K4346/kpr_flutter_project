@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<DropdownMenuItem<String>> allDropDownCurrencies = [];
 
   String? newCurrencyValue;
-  String? currencySelected;
+  String currencySelected = "USD";
   int? currencySelectedNominal;
   String? currencyNominalToShow;
 
@@ -122,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -136,13 +137,13 @@ class _MyHomePageState extends State<MyHomePage> {
             return Center(
                 child: Container(
               width: 400,
-              padding: EdgeInsets.only(top: 15.0),
+              padding: const EdgeInsets.only(top: 15.0),
               child: Column(
                 children: <Widget>[
                   const Padding(
                       padding: EdgeInsets.only(bottom: 5.0),
                       child: Text(
-                        'Валюта:',
+                        'Выберите валюту:',
                       )),
                   DropdownButton(
                     value: currencySelected,
@@ -151,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       isCurrencySelected(value as String);
                     },
                   ),
-                  if (currencySelected != null)
+                  if (snapshot.data!.valute[currencySelected] != null)
                     Padding(
                         padding: const EdgeInsets.only(top: 15.0),
                         child: Text(
@@ -179,13 +180,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     Padding(
                         padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                         child: Text(currencyNominalToShow!)),
-                  if (currencySelected != null)
+                  if (snapshot.data!.valute[currencySelected] != null)
                     const Padding(
                         padding: EdgeInsets.only(top: 10.0),
                         child: Text("Динамика по сравнению с прошлым днем:",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16))),
-                  if (currencySelected != null)
+                  if (snapshot.data!.valute[currencySelected] != null)
                     CustomPaint(
                       size: const Size(100, 100),
                       painter: ArrowPainter(
@@ -205,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         dataMap: {
                           "Increase": splittedCurrenciesCount[0],
                           "Decrease": splittedCurrenciesCount[1],
-                          "Equels": splittedCurrenciesCount[2],
+                          "Equals": splittedCurrenciesCount[2],
                         },
                         animationDuration: const Duration(milliseconds: 800),
                         chartLegendSpacing: 32,
@@ -258,4 +259,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 }
